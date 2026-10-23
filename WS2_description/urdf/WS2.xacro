@@ -1,0 +1,140 @@
+<?xml version="1.0" ?>
+<robot name="WS2" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find WS2_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find WS2_description)/urdf/WS2.ros2control" />
+<xacro:include filename="$(find WS2_description)/urdf/WS2.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.03935696731693397 0.0105511708709443 -0.025" rpy="0 0 0"/>
+    <mass value="0.6711576290786943"/>
+    <inertia ixx="0.000178" iyy="0.000504" izz="0.000379" ixy="-2e-06" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find WS2_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find WS2_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rueda1_1">
+  <inertial>
+    <origin xyz="-5.204170427930421e-18 -5.204170427930421e-18 0.0049999999999999975" rpy="0 0 0"/>
+    <mass value="0.1541343895667492"/>
+    <inertia ixx="2.5e-05" iyy="2.5e-05" izz="4.8e-05" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.01 -0.01 -0.015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find WS2_description)/meshes/rueda1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.01 -0.01 -0.015" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find WS2_description)/meshes/rueda1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rueda2_1">
+  <inertial>
+    <origin xyz="-5.204170427930421e-18 -5.204170427930421e-18 -0.0049999999999999906" rpy="0 0 0"/>
+    <mass value="0.1541343895667492"/>
+    <inertia ixx="2.5e-05" iyy="2.5e-05" izz="4.8e-05" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.01 -0.01 0.065" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find WS2_description)/meshes/rueda2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.01 -0.01 0.065" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find WS2_description)/meshes/rueda2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="castor_1">
+  <inertial>
+    <origin xyz="-0.015 -0.006071428571428569 0.0" rpy="0 0 0"/>
+    <mass value="0.028771752719126516"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="1e-06" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.08 -0.0 0.025" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find WS2_description)/meshes/castor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.08 -0.0 0.025" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find WS2_description)/meshes/castor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Lidar_1">
+  <inertial>
+    <origin xyz="-6.938893903907228e-18 0.0025000000000000022 0.0" rpy="0 0 0"/>
+    <mass value="0.012330751165339937"/>
+    <inertia ixx="0.0" iyy="1e-06" izz="0.0" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.045 -0.03 0.025" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find WS2_description)/meshes/Lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.045 -0.03 0.025" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find WS2_description)/meshes/Lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Revolución 1" type="continuous">
+  <origin xyz="0.01 0.01 0.015" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="rueda1_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<joint name="Revolución 2" type="continuous">
+  <origin xyz="0.01 0.01 -0.065" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="rueda2_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<joint name="Revolución 3" type="continuous">
+  <origin xyz="0.08 0.0 -0.025" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="castor_1"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+</joint>
+
+<joint name="Revolución 4" type="continuous">
+  <origin xyz="0.045 0.03 -0.025" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Lidar_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+</robot>
