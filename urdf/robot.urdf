@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<robot name="ws2_g2">
+  <material name="azul"><color rgba="0.07 0.24 0.87 1"/></material>
+  <material name="naranja"><color rgba="1 0.37 0.04 1"/></material>
+  <material name="negro"><color rgba="0.08 0.09 0.12 1"/></material>
+  <material name="gris"><color rgba="0.55 0.58 0.62 1"/></material>
+  <link name="base_footprint"/>
+  <joint name="footprint_to_base" type="fixed"><parent link="base_footprint"/><child link="base_link"/><origin xyz="0 0 0.065"/></joint>
+  <link name="base_link">
+    <inertial><mass value="1.4"/><origin xyz="0 0 0"/><inertia ixx="0.009" iyy="0.014" izz="0.018" ixy="0" ixz="0" iyz="0"/></inertial>
+    <visual><origin xyz="0 0 0.025"/><geometry><box size="0.24 0.17 0.075"/></geometry><material name="azul"/></visual>
+    <collision><origin xyz="0 0 0.025"/><geometry><box size="0.24 0.17 0.075"/></geometry></collision>
+  </link>
+  <link name="left_wheel">
+    <inertial><mass value="0.16"/><inertia ixx="0.00012" iyy="0.00007" izz="0.00012" ixy="0" ixz="0" iyz="0"/></inertial>
+    <visual><origin rpy="1.570796327 0 0"/><geometry><cylinder radius="0.055" length="0.025"/></geometry><material name="negro"/></visual>
+    <collision><origin rpy="1.570796327 0 0"/><geometry><cylinder radius="0.055" length="0.025"/></geometry></collision>
+  </link>
+  <joint name="left_wheel_joint" type="continuous"><parent link="base_link"/><child link="left_wheel"/><origin xyz="-0.01 0.105 -0.01"/><axis xyz="0 1 0"/></joint>
+  <link name="right_wheel">
+    <inertial><mass value="0.16"/><inertia ixx="0.00012" iyy="0.00007" izz="0.00012" ixy="0" ixz="0" iyz="0"/></inertial>
+    <visual><origin rpy="1.570796327 0 0"/><geometry><cylinder radius="0.055" length="0.025"/></geometry><material name="negro"/></visual>
+    <collision><origin rpy="1.570796327 0 0"/><geometry><cylinder radius="0.055" length="0.025"/></geometry></collision>
+  </link>
+  <joint name="right_wheel_joint" type="continuous"><parent link="base_link"/><child link="right_wheel"/><origin xyz="-0.01 -0.105 -0.01"/><axis xyz="0 1 0"/></joint>
+  <link name="caster">
+    <inertial><mass value="0.035"/><inertia ixx="0.00002" iyy="0.00002" izz="0.00002" ixy="0" ixz="0" iyz="0"/></inertial>
+    <visual><geometry><sphere radius="0.035"/></geometry><material name="gris"/></visual>
+    <collision><geometry><sphere radius="0.035"/></geometry></collision>
+  </link>
+  <joint name="caster_joint" type="fixed"><parent link="base_link"/><child link="caster"/><origin xyz="0.105 0 -0.03"/></joint>
+  <link name="lidar_decorativo"><visual><geometry><cylinder radius="0.045" length="0.025"/></geometry><material name="naranja"/></visual></link>
+  <joint name="lidar_fixed" type="fixed"><parent link="base_link"/><child link="lidar_decorativo"/><origin xyz="0.05 0 0.075"/></joint>
+  <gazebo reference="base_link"><material>Gazebo/Blue</material></gazebo>
+  <gazebo reference="left_wheel"><material>Gazebo/Black</material><mu1>1.0</mu1><mu2>1.0</mu2></gazebo>
+  <gazebo reference="right_wheel"><material>Gazebo/Black</material><mu1>1.0</mu1><mu2>1.0</mu2></gazebo>
+  <gazebo reference="lidar_decorativo"><material>Gazebo/Orange</material></gazebo>
+  <gazebo><plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+    <left_joint>left_wheel_joint</left_joint><right_joint>right_wheel_joint</right_joint>
+    <wheel_separation>0.21</wheel_separation><wheel_radius>0.055</wheel_radius>
+    <topic>/cmd_vel</topic><odom_topic>/odom</odom_topic><frame_id>odom</frame_id><child_frame_id>base_footprint</child_frame_id>
+    <odom_publish_frequency>30</odom_publish_frequency>
+  </plugin></gazebo>
+</robot>
